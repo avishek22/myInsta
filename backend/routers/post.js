@@ -150,6 +150,20 @@ router.get("/allpost", requireLogin, (req, res) => {
     });
 });
 
+router.get("/savedpost", requireLogin, (req, res) => {
+  let myid = req.user._id;
+  Post.find({ saved: req.user._id })
+
+    .populate("postedBy", "_id username dp date")
+    .populate("comments.postedBy", "_id username dp")
+    .then((posts) => {
+      res.json({ posts });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 router.get("/mypost", requireLogin, (req, res) => {
   Post.find({ postedBy: req.user._id })
     .populate("postedBy", "_id username dp date")
