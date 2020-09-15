@@ -1,4 +1,4 @@
 # myInsta
 My very own Instagram.
 Clone the repository.
-Install all the packages and run on localhost to run this piece of code.
+Install all the packages and run on localhost to execute this piece of code.
