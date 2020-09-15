@@ -107,32 +107,62 @@ const Login = () => {
                 setPassword(e.target.value);
               }}
             ></input>
-            <button
-              onClick={() => {
-                c = c + 1;
-                console.log(c);
-                if (c % 2 === 0) {
-                  setShow("text");
-                  setShowca("hide");
-                } else {
-                  setShow("password");
-                  setShowca("show");
-                  // c = c + 1;
-                }
-              }}
-              style={{
-                marginBottom: 8,
-                backgroundColor: "#F9F9F9",
-                borderRadius: 2,
-                border: "1px solid gray",
-                borderLeft: 0,
-                color: "gray",
-                fontSize: 10,
-                cursor: "pointer",
-              }}
-            >
-              {showca}
-            </button>
+            {password === "" ? (
+              <button
+                onClick={() => {
+                  c = c + 1;
+                  console.log(c);
+                  if (c % 2 === 0) {
+                    setShow("text");
+                    setShowca("hide");
+                  } else {
+                    setShow("password");
+                    setShowca("show");
+                    // c = c + 1;
+                  }
+                }}
+                style={{
+                  marginBottom: 8,
+                  backgroundColor: "#F9F9F9",
+                  borderRadius: 2,
+                  border: "1px solid gray",
+                  borderLeft: 0,
+                  color: "gray",
+                  fontSize: 10,
+                  cursor: "not-allowed",
+                }}
+                disabled
+              >
+                {showca}
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  c = c + 1;
+                  console.log(c);
+                  if (c % 2 === 0) {
+                    setShow("text");
+                    setShowca("hide");
+                  } else {
+                    setShow("password");
+                    setShowca("show");
+                    // c = c + 1;
+                  }
+                }}
+                style={{
+                  marginBottom: 8,
+                  backgroundColor: "#F9F9F9",
+                  borderRadius: 2,
+                  border: "1px solid gray",
+                  borderLeft: 0,
+                  color: "gray",
+                  fontSize: 10,
+                  cursor: "pointer",
+                }}
+              >
+                {showca}
+              </button>
+            )}
           </div>
 
           <button

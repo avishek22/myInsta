@@ -190,7 +190,7 @@ const Signup = () => {
             style={{
               border: "1px solid gray",
               borderRadius: 2,
-              color: "gray",
+
               backgroundColor: "#F9F9F9",
             }}
             value={email}
@@ -214,32 +214,62 @@ const Signup = () => {
                 setPassword(e.target.value);
               }}
             ></input>
-            <button
-              onClick={() => {
-                c = c + 1;
-                console.log(c);
-                if (c % 2 === 0) {
-                  setShow("text");
-                  setShowca("hide");
-                } else {
-                  setShow("password");
-                  setShowca("show");
-                  // c = c + 1;
-                }
-              }}
-              style={{
-                marginBottom: 8,
-                backgroundColor: "#F9F9F9",
-                borderRadius: 2,
-                border: "1px solid gray",
-                borderLeft: 0,
-                color: "gray",
-                fontSize: 10,
-                cursor: "pointer",
-              }}
-            >
-              {showca}
-            </button>
+            {password === "" ? (
+              <button
+                onClick={() => {
+                  c = c + 1;
+                  console.log(c);
+                  if (c % 2 === 0) {
+                    setShow("text");
+                    setShowca("hide");
+                  } else {
+                    setShow("password");
+                    setShowca("show");
+                    // c = c + 1;
+                  }
+                }}
+                style={{
+                  marginBottom: 8,
+                  backgroundColor: "#F9F9F9",
+                  borderRadius: 2,
+                  border: "1px solid gray",
+                  borderLeft: 0,
+                  color: "gray",
+                  fontSize: 10,
+                  cursor: "not-allowed",
+                }}
+                disabled
+              >
+                {showca}
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  c = c + 1;
+                  console.log(c);
+                  if (c % 2 === 0) {
+                    setShow("text");
+                    setShowca("hide");
+                  } else {
+                    setShow("password");
+                    setShowca("show");
+                    // c = c + 1;
+                  }
+                }}
+                style={{
+                  marginBottom: 8,
+                  backgroundColor: "#F9F9F9",
+                  borderRadius: 2,
+                  border: "1px solid gray",
+                  borderLeft: 0,
+                  color: "gray",
+                  fontSize: 10,
+                  cursor: "pointer",
+                }}
+              >
+                {showca}
+              </button>
+            )}
           </div>
           <div style={{ display: "flex" }}>
             <input
@@ -257,33 +287,64 @@ const Signup = () => {
                 setConfirmPassword(e.target.value);
               }}
             ></input>
-            <button
-              onClick={() => {
-                a = a + 1;
-                console.log(a);
-                if (a % 2 === 0) {
-                  setShowc("text");
-                  setShowcas("hide");
+            {confirmpassword === "" ? (
+              <button
+                onClick={() => {
                   a = a + 1;
-                } else {
-                  setShowc("password");
-                  setShowcas("show");
-                  // c = c + 1;
-                }
-              }}
-              style={{
-                marginBottom: 8,
-                backgroundColor: "#F9F9F9",
-                border: "1px solid gray",
-                borderLeft: 0,
-                borderRadius: 2,
-                color: "gray",
-                fontSize: 10,
-                cursor: "pointer",
-              }}
-            >
-              {showcas}
-            </button>
+                  console.log(a);
+                  if (a % 2 === 0) {
+                    setShowc("text");
+                    setShowcas("hide");
+                    a = a + 1;
+                  } else {
+                    setShowc("password");
+                    setShowcas("show");
+                    // c = c + 1;
+                  }
+                }}
+                style={{
+                  marginBottom: 8,
+                  backgroundColor: "#F9F9F9",
+                  border: "1px solid gray",
+                  borderLeft: 0,
+                  borderRadius: 2,
+                  color: "gray",
+                  fontSize: 10,
+                  cursor: "not-allowed",
+                }}
+                disabled
+              >
+                {showcas}
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  a = a + 1;
+                  console.log(a);
+                  if (a % 2 === 0) {
+                    setShowc("text");
+                    setShowcas("hide");
+                    a = a + 1;
+                  } else {
+                    setShowc("password");
+                    setShowcas("show");
+                    // c = c + 1;
+                  }
+                }}
+                style={{
+                  marginBottom: 8,
+                  backgroundColor: "#F9F9F9",
+                  border: "1px solid gray",
+                  borderLeft: 0,
+                  borderRadius: 2,
+                  color: "gray",
+                  fontSize: 10,
+                  cursor: "pointer",
+                }}
+              >
+                {showcas}
+              </button>
+            )}
           </div>
 
           <button
