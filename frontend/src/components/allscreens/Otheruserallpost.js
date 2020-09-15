@@ -118,6 +118,7 @@ const Home = () => {
           }
         });
         setData(newData);
+        Swal.fire("Saved", "Photo saved to collection!", "success");
       })
       .catch((e) => {
         console.log(e);
