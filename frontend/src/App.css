@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
+
+.brand-logo {
+  font-family: "Grand Hotel", cursive;
+}
+
+.mycard {
+  margin: 30px;
+}
+
+.navlink:hover {
+  background-color: rgba(204, 197, 196, 0.5);
+  border-radius: 5%;
+  transition: 0.5s all;
+}
+img.modal-trigger.navlink:active {
+  border: 1px solid black;
+}
+.auth-card {
+  padding: 20px;
+  text-align: center;
+  max-width: 350px;
+  margin: 10px auto;
+}
+
+.login {
+  margin-top: 10px;
+  background-color: #0095f6;
+  width: 102%;
+  z-index: 0;
+}
+
+.login:hover {
+  background-color: #0095f6;
+}
+
+.login:focus {
+  background-color: #0095f6;
+  width: 102%;
+}
+
+.signuplink {
+  color: #0095f6;
+}
+
+a {
+  color: black;
+}
+.removeborder.input-field input[type="text"]:focus {
+  border: none;
+  /* box-shadow: 0 1px 0 0 #000 !important; */
+}
+.input-field input[type="text"]:focus {
+  border: 1px solid #000000 !important;
+  box-shadow: 0 1px 0 0 #000 !important;
+
+  /* margin-top: 1%; */
+}
+
+.input-field input[type="password"]:focus {
+  /* border: 1px solid #000000 !important; */
+  /* box-shadow: 0 1px 0 0 #000 !important; */
+
+  /* margin-top: 1%; */
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin-left: 6%; */
+  margin: 0 auto;
+}
+
+.item {
+  width: 322px;
+  margin: 0.5%;
+  height: 250px;
+}
+
+.home-card {
+  max-width: 700px;
+  height: max-content;
+  margin: 26px auto;
+}
+
+.needsmargin {
+  margin: 0 20% 0 20%;
+}
+
+.dp {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+}
+.prof {
+  margin-left: 43%;
+}
+
+i.hov {
+  padding: 2%;
+}
+
+i.hov:hover {
+  background-color: rgba(204, 197, 196, 0.5);
+  border-radius: 5%;
+  transition: 0.5s all;
+}
+
+i.delete:hover {
+  background-color: rgba(204, 197, 196, 0.5);
+  border-radius: 5%;
+  transition: 0.5s all;
+}
+
+.loader {
+  margin-top: 2%;
+  margin-left: 48%;
+}
+
+select.accounttype {
+  border: none;
+}
+
+select.accounttype:focus {
+  border: black 1px solid;
+}
+
+div.navfix {
+  margin-top: 5%;
+  z-index: 0;
+}
+
+div.createpost {
+  margin: 30px auto;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 5%;
+  z-index: 0;
+}
+
+div.editpost {
+  margin: 30px auto;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 5%;
+  z-index: 0;
+}
+.editprofile {
+  margin: 30px auto;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 5%;
+  z-index: 0;
+}
+.mypost {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 5%;
+  z-index: 0;
+}
+@media screen and (max-width: 600px) {
+  .dp {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+  }
+  .gallery {
+    margin-left: 10%;
+  }
+  .item {
+    width: 30%;
+    margin: 0.5%;
+    height: 90px;
+  }
+  .needsmargin {
+    margin: 0 3%;
+  }
+  .prof {
+    margin-left: 40%;
+  }
+  .loader {
+    margin-top: 2%;
+    margin-left: 40%;
+  }
+  div.navfix {
+    margin-top: 20%;
+    z-index: 0;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 800px) {
+  .gallery {
+    margin-left: 10%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 2000px) {
+  .modal {
+    width: 10%;
+    margin-left: 70%;
+  }
+  h6.navtext {
+    margin-top: "15%";
+  }
+}
