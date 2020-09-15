@@ -184,11 +184,49 @@ router.put("/like", requireLogin, (req, res) => {
     });
 });
 
+router.put("/save", requireLogin, (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    {
+      $push: { saved: req.user._id },
+    },
+    { new: true }
+  )
+    .populate("postedBy", "_id username dp")
+    .populate("comments.postedBy", "_id username dp")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
+});
+
 router.put("/unlike", requireLogin, (req, res) => {
   Post.findByIdAndUpdate(
     req.body.postId,
     {
       $pull: { likes: req.user._id },
+    },
+    { new: true }
+  )
+    .populate("postedBy", "_id username dp")
+    .populate("comments.postedBy", "_id username dp")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
+});
+
+router.put("/unsave", requireLogin, (req, res) => {
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    {
+      $pull: { saved: req.user._id },
     },
     { new: true }
   )

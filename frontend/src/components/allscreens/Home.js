@@ -52,9 +52,67 @@ const Home = () => {
         console.log(e);
       });
   };
+
+  const savePost = (id) => {
+    fetch("http://localhost:4000/save", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        c = 0;
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   const unlikePost = (id) => {
     c = 0;
     fetch("http://localhost:4000/unlike", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = data.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        setData(newData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const unsavePost = (id) => {
+    c = 0;
+    fetch("http://localhost:4000/unsave", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -224,6 +282,39 @@ const Home = () => {
                   chat_bubble_outline
                 </i>
               </Link>
+
+              {item.saved.includes(state._id) ? (
+                <i
+                  className="material-icons"
+                  onClick={() => {
+                    unsavePost(item._id);
+                  }}
+                  style={{ color: "black", cursor: "pointer", float: "right" }}
+                >
+                  bookmark
+                </i>
+              ) : (
+                <i
+                  className="material-icons"
+                  style={{ cursor: "pointer", float: "right" }}
+                  onClick={() => {
+                    c = c + 1;
+                    // console.log(c);
+                    if (c === 1) {
+                      savePost(item._id);
+                    }
+                    //  else {
+                    //   Swal.fire(
+                    //     "Asshole",
+                    //     "How many times are you liking asshole!",
+                    //     "warning"
+                    //   );
+                    // }
+                  }}
+                >
+                  bookmark_border
+                </i>
+              )}
 
               <br></br>
               <Link
