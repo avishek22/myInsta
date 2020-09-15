@@ -283,8 +283,9 @@ const Home = () => {
                   chat_bubble_outline
                 </i>
               </Link>
-
-              {item.saved.includes(state._id) ? (
+              {item.postedBy._id === state._id ? (
+                ""
+              ) : item.saved.includes(state._id) ? (
                 <i
                   className="material-icons"
                   onClick={() => {
