@@ -13,6 +13,8 @@ const Profile = () => {
   const [following, setFollowing] = useState("");
   const [accounttype, setAccounttype] = useState("");
   const [followrequest, setFollowrequest] = useState(0);
+  const [notifyfollowers, setNotifyfollowers] = useState("");
+  const [notifyfollowing, setNotifyfollowing] = useState("");
   const [dp, setDp] = useState("");
   useEffect(() => {
     fetch("http://localhost:4000/finaluser", {
@@ -30,7 +32,10 @@ const Profile = () => {
         setDp(result.user.dp);
         setFollowrequest(result.user.followrequest.length);
         setFollowers(result.user.followers.length);
+        setNotifyfollowers(result.user.followers);
+        setNotifyfollowing(result.user.following);
         setFollowing(result.user.following.length);
+        setLoading(true);
         document.title = `${result.user.username} | myInsta`;
       });
   }, []);
@@ -46,7 +51,7 @@ const Profile = () => {
         setMyPost(result.myPost);
         console.log(result.myPost.length);
         setPostNo(result.myPost.length);
-        setLoading(true);
+        // setLoading(true);
       });
   }, []);
 
@@ -73,6 +78,63 @@ const Profile = () => {
         ""
       )}
       <div className="likes card home-card input-field">
+        {notifyfollowers !== "" && followers !== 0
+          ? notifyfollowers.map((item) => {
+              return (
+                <div className="" key={item._id}>
+                  <div style={{ display: "flex" }}>
+                    <Link
+                      to={
+                        item._id !== state._id
+                          ? "/otherprofile/" + item._id
+                          : "/profile"
+                      }
+                      style={{ margin: "5% 0% 5% 5%" }}
+                    >
+                      <img
+                        src={item.dp}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 30,
+                          margin: "5% 0% 5% 5%",
+                        }}
+                      ></img>
+                    </Link>
+                    <div style={{ marginLeft: "10%", marginTop: "7%" }}>
+                      <p
+                        style={{
+                          marginTop: "7%",
+                          marginLeft: "5%",
+
+                          fontSize: "25px",
+                        }}
+                      >
+                        <Link
+                          to={
+                            item._id !== state._id
+                              ? "/otherprofile/" + item._id
+                              : "/profile"
+                          }
+                        >
+                          <strong>{item.username}</strong>
+                        </Link>
+                      </p>
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "9%",
+                        marginLeft: "2%",
+                      }}
+                    >
+                      started following you.
+                    </p>
+                  </div>
+                  <hr></hr>
+                </div>
+              );
+            })
+          : ""}
         {mypost === "No Posts Yet" ? (
           <h4>No New Notifications.</h4>
         ) : (
@@ -80,7 +142,9 @@ const Profile = () => {
             return (
               <div className="" key={item._id}>
                 {item.likes.length > 0 || item.comments.length > 0 ? (
-                  <div style={{ display: "flex" }}>
+                  <div
+                    style={{ display: "flex", borderBottom: "1px solid gray" }}
+                  >
                     <Link style={{ margin: "5%" }} to="/mypost">
                       <img
                         src={item.photo}
@@ -94,7 +158,7 @@ const Profile = () => {
                     <p
                       style={{
                         marginTop: "7%",
-                        marginLeft: "15%",
+                        marginLeft: "5%",
                         fontSize: "25px",
                       }}
                     >
@@ -133,6 +197,63 @@ const Profile = () => {
             );
           })
         )}
+        {notifyfollowing !== "" && following !== 0
+          ? notifyfollowing.slice(1).map((item) => {
+              return (
+                <div className="" key={item._id}>
+                  <div style={{ display: "flex" }}>
+                    <Link
+                      to={
+                        item._id !== state._id
+                          ? "/otherprofile/" + item._id
+                          : "/profile"
+                      }
+                      style={{ margin: "5% 0% 5% 5%" }}
+                    >
+                      <img
+                        src={item.dp}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 30,
+                          margin: "5% 0% 5% 5%",
+                        }}
+                      ></img>
+                    </Link>
+                    <div style={{ marginLeft: "10%", marginTop: "7%" }}>
+                      <p
+                        style={{
+                          marginTop: "7%",
+                          marginLeft: "5%",
+
+                          fontSize: "25px",
+                        }}
+                      >
+                        <Link
+                          to={
+                            item._id !== state._id
+                              ? "/otherprofile/" + item._id
+                              : "/profile"
+                          }
+                        >
+                          <strong>{item.username}</strong>
+                        </Link>
+                      </p>
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "9%",
+                        marginLeft: "2%",
+                      }}
+                    >
+                      accepted your follow request.
+                    </p>
+                  </div>
+                  <hr></hr>
+                </div>
+              );
+            })
+          : ""}
 
         {loading ? (
           ""
