@@ -115,6 +115,18 @@ const Navbar = () => {
               <h6 style={{ marginLeft: "15%", marginTop: 15 }}>New Post</h6>
             </div>
           </Link>
+          <Link
+            to="/savedphoto"
+            style={{ color: "black" }}
+            onClick={() => {
+              materialize.Modal.getInstance(navs.current).close();
+            }}
+          >
+            <div style={{ display: "flex" }} className="navlink">
+              <i className="material-icons">bookmark_outline</i>
+              <h6 style={{ marginLeft: "15%", marginTop: 15 }}>Saved</h6>
+            </div>
+          </Link>
 
           <hr></hr>
 

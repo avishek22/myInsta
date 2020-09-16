@@ -20,6 +20,7 @@ import Myfollowers from "./components/allscreens/Myfollowers";
 import { reducer, initialState } from "./reducer/userReducer";
 import Stories from "react-insta-stories";
 import Notification from "./components/allscreens/Notification";
+import Savedphoto from "./components/allscreens/Savedphoto";
 import TitleComponent from "./components/allscreens/TitleComponent";
 
 export const UserContext = createContext();
@@ -140,6 +141,10 @@ const Routing = () => {
       <Route exact path="/myfollowers">
         <Navbar></Navbar>
         <Myfollowers></Myfollowers>
+      </Route>
+      <Route exact path="/savedphoto">
+        <Navbar></Navbar>
+        <Savedphoto></Savedphoto>
       </Route>
     </Switch>
   );
