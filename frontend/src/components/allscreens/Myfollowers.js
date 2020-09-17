@@ -28,6 +28,27 @@ const Home = () => {
       });
   }, []);
 
+  const deleterequest = (id) => {
+    fetch("http://localhost:4000/removefollower", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        _id: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        window.location.reload();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <div>
       {loading ? (
@@ -96,33 +117,50 @@ const Home = () => {
                 ""
               ) : (
                 <div>
-                  <Link
-                    to={
-                      item._id !== state._id
-                        ? "/otherprofile/" + item._id
-                        : "/profile"
-                    }
-                    style={{ display: "flex" }}
-                  >
-                    <img
-                      src={item.dp}
+                  <div style={{ display: "flex", margin: "5% " }}>
+                    <Link
+                      to={
+                        item._id !== state._id
+                          ? "/otherprofile/" + item._id
+                          : "/profile"
+                      }
+                      style={{ display: "flex" }}
+                    >
+                      <img
+                        src={item.dp}
+                        style={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: 30,
+                          margin: "5%",
+                          marginTop: "15%",
+                        }}
+                      ></img>
+                      <p
+                        style={{
+                          marginTop: "20%",
+                          marginLeft: "15%",
+                          fontSize: "25px",
+                        }}
+                      >
+                        <strong>{item.username}</strong>
+                      </p>
+                    </Link>
+                    <button
+                      className="btn waves-effect waves-light btn-block login"
                       style={{
-                        width: 60,
-                        height: 60,
-                        borderRadius: 30,
-                        margin: "5%",
+                        marginTop: "20%",
+                        marginLeft: "-12%",
+                        width: "20%",
+                        padding: 0,
                       }}
-                    ></img>
-                    <p
-                      style={{
-                        marginTop: "7%",
-                        marginLeft: "15%",
-                        fontSize: "25px",
+                      onClick={() => {
+                        deleterequest(item._id);
                       }}
                     >
-                      <strong>{item.username}</strong>
-                    </p>
-                  </Link>
+                      Remove
+                    </button>
+                  </div>
                   <hr></hr>
                 </div>
               )}
