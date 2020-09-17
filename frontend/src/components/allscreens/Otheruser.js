@@ -153,14 +153,30 @@ const Profile = () => {
               )}
               posts &nbsp;&nbsp;
             </p>
-
-            <p>
-              <strong>{followers}</strong> followers&nbsp;&nbsp;
-            </p>
-
-            <p>
-              <strong>{following - 1}</strong> following
-            </p>
+            {accounttype === "Public" ||
+            (accounttype === "Private" && follow === "yes") ? (
+              <Link to={`/otherfollowers/${userid}`}>
+                <p>
+                  <strong>{followers}</strong> followers&nbsp;&nbsp;
+                </p>
+              </Link>
+            ) : (
+              <p>
+                <strong>{followers}</strong> followers&nbsp;&nbsp;
+              </p>
+            )}
+            {accounttype === "Public" ||
+            (accounttype === "Private" && follow === "yes") ? (
+              <Link to={`/otherfollowing/${userid}`}>
+                <p>
+                  <strong>{following - 1}</strong> following
+                </p>
+              </Link>
+            ) : (
+              <p>
+                <strong>{following - 1}</strong> following
+              </p>
+            )}
           </div>
           <p>{bio}</p>
           {button === "Follow" ? (

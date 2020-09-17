@@ -17,7 +17,9 @@ const Home = () => {
   const [followers, setFollowers] = useState("0");
   const [button, setButton] = useState("");
   const [dp, setDp] = useState("");
+  const [accounttype, setAccounttype] = useState("");
   const { userid } = useParams();
+  const [follow, setFollow] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:4000/followunfollow/${userid}`, {
@@ -30,6 +32,7 @@ const Home = () => {
         console.log(result);
         setButton(result.button);
         console.log(result.button);
+        setAccounttype(result.user.accounttype);
 
         // SetUserProfile(result.user);
         // setFollowing(result.user.following.length);
@@ -57,7 +60,7 @@ const Home = () => {
         setFollowing(result.user.following.length);
         setFollowers(result.user.followers.length);
         document.title = `${result.user.username} | myInsta`;
-
+        setFollow(result.doesfollow);
         console.log(userprofile);
         setData(result.myPost);
         console.log(data);
@@ -283,13 +286,30 @@ const Home = () => {
               posts &nbsp;&nbsp;
             </p>
 
-            <p>
-              <strong>{followers}</strong> followers&nbsp;&nbsp;
-            </p>
-
-            <p>
-              <strong>{following - 1}</strong> following
-            </p>
+            {accounttype === "Public" ||
+            (accounttype === "Private" && follow === "yes") ? (
+              <Link to={`/otherfollowers/${userid}`}>
+                <p>
+                  <strong>{followers}</strong> followers&nbsp;&nbsp;
+                </p>
+              </Link>
+            ) : (
+              <p>
+                <strong>{followers}</strong> followers&nbsp;&nbsp;
+              </p>
+            )}
+            {accounttype === "Public" ||
+            (accounttype === "Private" && follow === "yes") ? (
+              <Link to={`/otherfollowing/${userid}`}>
+                <p>
+                  <strong>{following - 1}</strong> following
+                </p>
+              </Link>
+            ) : (
+              <p>
+                <strong>{following - 1}</strong> following
+              </p>
+            )}
           </div>
           <p>{userprofile.bio}</p>
           {button === "Follow" ? (

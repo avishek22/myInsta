@@ -21,6 +21,8 @@ import { reducer, initialState } from "./reducer/userReducer";
 import Stories from "react-insta-stories";
 import Notification from "./components/allscreens/Notification";
 import Savedphoto from "./components/allscreens/Savedphoto";
+import Otherfollowers from "./components/allscreens/Otherfollowers";
+import Otherfollowing from "./components/allscreens/Otherfollowing";
 import TitleComponent from "./components/allscreens/TitleComponent";
 
 export const UserContext = createContext();
@@ -121,6 +123,14 @@ const Routing = () => {
       <Route exact path="/otherprofileallpost/:userid">
         <Navbar></Navbar>
         <Otheruserallpost></Otheruserallpost>
+      </Route>
+      <Route exact path="/otherfollowers/:userid">
+        <Navbar></Navbar>
+        <Otherfollowers></Otherfollowers>
+      </Route>
+      <Route exact path="/otherfollowing/:userid">
+        <Navbar></Navbar>
+        <Otherfollowing></Otherfollowing>
       </Route>
       <Route exact path="/editprofile">
         <Navbar></Navbar>

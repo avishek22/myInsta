@@ -31,10 +31,34 @@ router.get("/showfollowing", requireLogin, (req, res) => {
       res.json({ error: e });
     });
 });
+router.get("/showotherfollowing/:id", requireLogin, (req, res) => {
+  console.log(req.user._id);
+  User.findById(req.params.id)
+    .select("following")
+    .populate("following", "_id username dp")
+    .then((result) => {
+      res.json({ user: result });
+    })
+    .catch((e) => {
+      res.json({ error: e });
+    });
+});
 
 router.get("/showfollowers", requireLogin, (req, res) => {
   console.log(req.user._id);
   User.findById(req.user._id)
+    .select("followers")
+    .populate("followers", "_id username dp")
+    .then((result) => {
+      res.json({ user: result });
+    })
+    .catch((e) => {
+      res.json({ error: e });
+    });
+});
+router.get("/showotherfollowers/:id", requireLogin, (req, res) => {
+  console.log(req.user._id);
+  User.findById(req.params.id)
     .select("followers")
     .populate("followers", "_id username dp")
     .then((result) => {
