@@ -82,6 +82,8 @@ router.put("/editpost", requireLogin, (req, res) => {
 router.get("/finaluser", requireLogin, (req, res) => {
   User.findById(req.user._id)
     .select("-password")
+    .populate("followers", "_id username dp")
+    .populate("following", "_id username dp")
     .then((result) => {
       res.json({ user: result });
     })
@@ -138,12 +140,16 @@ router.delete("/deletepost/:postId", requireLogin, (req, res) => {
 });
 
 router.get("/allpost", requireLogin, (req, res) => {
-  // Post.find({ postedBy: { $in: req.user.following } })
-  Post.find()
+  Post.find({ postedBy: { $in: req.user.following } })
+
     .populate("postedBy", "_id username dp date")
     .populate("comments.postedBy", "_id username dp")
     .then((posts) => {
-      res.json({ posts });
+      if (posts.length === 0) {
+        res.json({ posts: "Go and explore myInsta" });
+      } else {
+        res.json({ posts });
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -156,8 +162,12 @@ router.get("/savedpost", requireLogin, (req, res) => {
 
     .populate("postedBy", "_id username dp date")
     .populate("comments.postedBy", "_id username dp")
-    .then((posts) => {
-      res.json({ posts });
+    .then((myPost) => {
+      if (myPost.length == 0) {
+        res.json({ myPost: "No saved pictures" });
+      } else {
+        res.json({ myPost });
+      }
     })
     .catch((err) => {
       console.log(err);
