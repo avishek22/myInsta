@@ -122,6 +122,31 @@ router.put("/removefollower", requireLogin, (req, res) => {
     });
 });
 
+router.put("/removefollowerlist", requireLogin, (req, res) => {
+  console.log(req.user._id);
+  console.log(req.body._id);
+  User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $pull: { followers: req.body._id },
+    },
+    (err, result) => {
+      if (err) {
+        res.status(422).json({ error: err });
+      }
+      User.findByIdAndUpdate(req.body._id, {
+        $pull: { following: req.user._id },
+      })
+        .then((result) => {
+          res.json({ user: result });
+        })
+        .catch((e) => {
+          res.status(422).json({ error: e });
+        });
+    }
+  );
+});
+
 router.put("/deleterequest/:id", requireLogin, (req, res) => {
   console.log(req.user._id);
   console.log(req.body._id);

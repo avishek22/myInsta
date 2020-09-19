@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
 
   const deleterequest = (id) => {
-    fetch("http://localhost:4000/removefollower", {
+    fetch("http://localhost:4000/removefollowerlist", {
       method: "put",
       headers: {
         "Content-Type": "application/json",

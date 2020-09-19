@@ -31,6 +31,7 @@ const Home = () => {
       .then((result) => {
         console.log(result);
         setButton(result.button);
+
         console.log(result.button);
         setAccounttype(result.user.accounttype);
 
@@ -66,6 +67,7 @@ const Home = () => {
         console.log(data);
         console.log(result.myPost.length);
         setPostNo(result.myPost.length);
+
         setLoading(true);
       });
   }, []);
@@ -257,6 +259,32 @@ const Home = () => {
         // setLoading(true);
       });
   };
+  const deleterequest = () => {
+    fetch(`http://localhost:4000/deleterequest/${userid}`, {
+      method: "put",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        window.location.reload();
+      });
+  };
+  const unfollow = () => {
+    fetch(`http://localhost:4000/unfollow/${userid}`, {
+      method: "put",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        window.location.reload();
+      });
+  };
   return (
     <div className="navfix mypost">
       <div
@@ -333,6 +361,9 @@ const Home = () => {
               // onClick={() => {
               //   localStorage.setItem("follow", state._id);
               // }}
+              onClick={() => {
+                unfollow();
+              }}
             >
               Unfollow
             </button>
@@ -345,6 +376,9 @@ const Home = () => {
               // onClick={() => {
               //   localStorage.setItem("follow", state._id);
               // }}
+              onClick={() => {
+                deleterequest();
+              }}
             >
               Delete Request
             </button>
