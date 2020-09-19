@@ -111,6 +111,7 @@ const Home = () => {
                         height: 60,
                         borderRadius: 30,
                         margin: "5%",
+                        pointerEvents: "none",
                       }}
                     ></img>
                     <p

@@ -134,7 +134,11 @@ const Profile = () => {
           margin: "18px 0px",
         }}
       >
-        <img className="dp" src={dp} style={{ marginTop: "4%" }}></img>
+        <img
+          className="dp"
+          src={dp}
+          style={{ marginTop: "4%", pointerEvents: "none" }}
+        ></img>
 
         <div>
           <h4>{username}</h4>
@@ -257,7 +261,12 @@ const Profile = () => {
           {mypost !== "No Posts Yet" ? (
             mypost.map((item) => {
               return (
-                <img className="item" src={item.photo} key={item._id}></img>
+                <img
+                  className="item"
+                  src={item.photo}
+                  key={item._id}
+                  style={{ pointerEvents: "none" }}
+                ></img>
               );
             })
           ) : (

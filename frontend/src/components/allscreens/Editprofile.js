@@ -156,6 +156,7 @@ const Createpost = () => {
             height: 227,
             width: 227,
             marginBottom: "2%",
+            pointerEvents: "none",
           }}
         ></img>
         <input

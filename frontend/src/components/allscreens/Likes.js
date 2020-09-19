@@ -137,7 +137,7 @@ const Home = () => {
       )}
 
       <div className="likes card home-card input-field navfix">
-        {data.map((item) => {
+        {data.reverse().map((item) => {
           return (
             <div style={{ display: "flex" }} key={item._id}>
               <Link
@@ -155,6 +155,7 @@ const Home = () => {
                     height: 60,
                     borderRadius: 30,
                     margin: "5%",
+                    pointerEvents: "none",
                   }}
                 ></img>
                 <p

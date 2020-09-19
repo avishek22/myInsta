@@ -84,7 +84,7 @@ const Createpost = () => {
       <img
         src={localStorage.getItem("editposturl")}
         alt="Add an image to preview"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", pointerEvents: "none" }}
       ></img>
       <input
         type="text"

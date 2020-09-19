@@ -147,6 +147,7 @@ const Home = () => {
                       height: 60,
                       borderRadius: 30,
                       margin: "5% 0% 5% 5%",
+                      pointerEvents: "none",
                     }}
                   ></img>
                 </Link>

@@ -134,6 +134,7 @@ const Home = () => {
                           borderRadius: 30,
                           margin: "5%",
                           marginTop: "15%",
+                          pointerEvents: "none",
                         }}
                       ></img>
                       <p

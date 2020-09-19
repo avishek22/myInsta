@@ -51,7 +51,7 @@ const Profile = () => {
         setMyPost(result.myPost);
         console.log(result.myPost.length);
         setPostNo(result.myPost.length);
-        // setLoading(true);
+        //setLoading(false);
       });
   }, []);
 
@@ -98,6 +98,7 @@ const Profile = () => {
                           height: 60,
                           borderRadius: 30,
                           margin: "5% 0% 5% 5%",
+                          pointerEvents: "none",
                         }}
                       ></img>
                     </Link>
@@ -151,6 +152,7 @@ const Profile = () => {
                         style={{
                           width: 60,
                           height: 60,
+                          pointerEvents: "none",
                         }}
                       ></img>
                     </Link>
@@ -198,61 +200,65 @@ const Profile = () => {
           })
         )}
         {notifyfollowing !== "" && following !== 0
-          ? notifyfollowing.slice(1).map((item) => {
-              return (
-                <div className="" key={item._id}>
-                  <div style={{ display: "flex" }}>
-                    <Link
-                      to={
-                        item._id !== state._id
-                          ? "/otherprofile/" + item._id
-                          : "/profile"
-                      }
-                      style={{ margin: "5% 0% 5% 5%" }}
-                    >
-                      <img
-                        src={item.dp}
-                        style={{
-                          width: 60,
-                          height: 60,
-                          borderRadius: 30,
-                          margin: "5% 0% 5% 5%",
-                        }}
-                      ></img>
-                    </Link>
-                    <div style={{ marginLeft: "10%", marginTop: "7%" }}>
+          ? notifyfollowing
+              .slice(1)
+              .reverse()
+              .map((item) => {
+                return (
+                  <div className="" key={item._id}>
+                    <div style={{ display: "flex" }}>
+                      <Link
+                        to={
+                          item._id !== state._id
+                            ? "/otherprofile/" + item._id
+                            : "/profile"
+                        }
+                        style={{ margin: "5% 0% 5% 5%" }}
+                      >
+                        <img
+                          src={item.dp}
+                          style={{
+                            width: 60,
+                            height: 60,
+                            borderRadius: 30,
+                            margin: "5% 0% 5% 5%",
+                            pointerEvents: "none",
+                          }}
+                        ></img>
+                      </Link>
+                      <div style={{ marginLeft: "10%", marginTop: "7%" }}>
+                        <p
+                          style={{
+                            marginTop: "7%",
+                            marginLeft: "5%",
+
+                            fontSize: "25px",
+                          }}
+                        >
+                          <Link
+                            to={
+                              item._id !== state._id
+                                ? "/otherprofile/" + item._id
+                                : "/profile"
+                            }
+                          >
+                            <strong>{item.username}</strong>
+                          </Link>
+                        </p>
+                      </div>
                       <p
                         style={{
-                          marginTop: "7%",
-                          marginLeft: "5%",
-
-                          fontSize: "25px",
+                          marginTop: "9%",
+                          marginLeft: "2%",
                         }}
                       >
-                        <Link
-                          to={
-                            item._id !== state._id
-                              ? "/otherprofile/" + item._id
-                              : "/profile"
-                          }
-                        >
-                          <strong>{item.username}</strong>
-                        </Link>
+                        accepted your follow request.
                       </p>
                     </div>
-                    <p
-                      style={{
-                        marginTop: "9%",
-                        marginLeft: "2%",
-                      }}
-                    >
-                      accepted your follow request.
-                    </p>
+                    <hr></hr>
                   </div>
-                  <hr></hr>
-                </div>
-              );
-            })
+                );
+              })
           : ""}
 
         {loading ? (

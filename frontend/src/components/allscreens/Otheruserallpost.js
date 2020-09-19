@@ -294,7 +294,11 @@ const Home = () => {
           margin: "18px 0px",
         }}
       >
-        <img className="dp" src={dp} style={{ marginTop: "4%" }}></img>
+        <img
+          className="dp"
+          src={dp}
+          style={{ marginTop: "4%", pointerEvents: "none" }}
+        ></img>
 
         <div>
           <h4>{userprofile.username}</h4>
@@ -421,6 +425,7 @@ const Home = () => {
                       height: 50,
                       borderRadius: 25,
                       margin: "5%",
+                      pointerEvents: "none",
                     }}
                   ></img>
                   <h5 style={{ margin: "5% 5% 5% 2%", paddingTop: "1.5%" }}>
@@ -515,7 +520,7 @@ const Home = () => {
                 </div>
 
                 <div className="card-image">
-                  <img src={item.photo}></img>
+                  <img src={item.photo} style={{ pointerEvents: "none" }}></img>
                 </div>
                 <div className="card-content">
                   {item.likes.includes(state._id) ? (

@@ -80,6 +80,8 @@ const Navbar = () => {
                 marginTop: 10,
                 marginBottom: -10,
                 cursor: "pointer",
+                marginLeft: "5%",
+                pointerEvents: "none",
               }}
               data-target="modal1"
               className="modal-trigger navlink"

@@ -192,6 +192,7 @@ const Home = () => {
                           border: "3px solid 	#C71585",
                           padding: "2%",
                           cursor: "pointer",
+                          pointerEvents: "none",
                         }}
                         key={item._id}
                       ></img>
@@ -223,6 +224,7 @@ const Home = () => {
                     height: 50,
                     borderRadius: 25,
                     margin: "5%",
+                    pointerEvents: "none",
                   }}
                 ></img>
                 <h5 style={{ margin: "5% 5% 5% 2%", paddingTop: "1.5%" }}>
@@ -239,7 +241,7 @@ const Home = () => {
               </div>
 
               <div className="card-image">
-                <img src={item.photo}></img>
+                <img style={{ pointerEvents: "none" }} src={item.photo}></img>
               </div>
               <div className="card-content">
                 {/* {console.log(typeof item.likes)} */}
