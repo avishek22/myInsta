@@ -180,7 +180,7 @@ const Home = () => {
           {data !== "Go and explore myInsta"
             ? data.slice(0, 4).map((item) => {
                 return (
-                  <div style={{ margin: "5% 0% 5% 5%" }} key={item._id}>
+                  <div style={{ margin: "5% 0% 2% 5%" }} key={item._id}>
                     <Link to="/story">
                       <img
                         src={item.postedBy.dp}
@@ -192,7 +192,6 @@ const Home = () => {
                           border: "3px solid 	#C71585",
                           padding: "2%",
                           cursor: "pointer",
-                          pointerEvents: "none",
                         }}
                         key={item._id}
                       ></img>

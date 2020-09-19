@@ -234,9 +234,18 @@ const Home = () => {
                       pointerEvents: "none",
                     }}
                   ></img>
-                  <h5 style={{ margin: "5% 5% 5% 2%", paddingTop: "1.5%" }}>
-                    {item.postedBy.username}
-                  </h5>
+                  <Link
+                    to={
+                      item.postedBy._id !== state._id
+                        ? "/otherprofile/" + item.postedBy._id
+                        : "/profile"
+                    }
+                    style={{ margin: "4% 5% 5% 2%", paddingTop: "1.5%" }}
+                  >
+                    <h5 style={{ margin: "5% 5% 5% 2%", paddingTop: "1.5%" }}>
+                      {item.postedBy.username}
+                    </h5>
+                  </Link>
                 </div>
 
                 <div className="card-image">

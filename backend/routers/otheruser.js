@@ -40,4 +40,16 @@ router.get("/user/:id", requireLogin, (req, res) => {
     });
 });
 
+router.post("/searchusername", (req, res) => {
+  let usernametype = new RegExp("^" + req.body.query);
+  User.find({ username: { $regex: usernametype } })
+    .select("_id username dp")
+    .then((user) => {
+      res.json({ user });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;
