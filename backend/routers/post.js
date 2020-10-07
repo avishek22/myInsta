@@ -79,6 +79,30 @@ router.put("/editpost", requireLogin, (req, res) => {
     });
 });
 
+router.put("/archivepost", requireLogin, (req, res) => {
+  Post.findByIdAndUpdate(req.body.editpostid, {
+    $set: { archive: "yes" },
+  })
+    .then((result) => {
+      res.json({ post: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.put("/unarchivepost", requireLogin, (req, res) => {
+  Post.findByIdAndUpdate(req.body.editpostid, {
+    $set: { archive: "no" },
+  })
+    .then((result) => {
+      res.json({ post: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 router.get("/finaluser", requireLogin, (req, res) => {
   User.findById(req.user._id)
     .select("-password")
@@ -140,10 +164,11 @@ router.delete("/deletepost/:postId", requireLogin, (req, res) => {
 });
 
 router.get("/allpost", requireLogin, (req, res) => {
-  Post.find({ postedBy: { $in: req.user.following } })
+  Post.find({ postedBy: { $in: req.user.following }, archive: "no" })
 
     .populate("postedBy", "_id username dp date")
     .populate("comments.postedBy", "_id username dp")
+    .sort("-createdAt")
     .then((posts) => {
       if (posts.length === 0) {
         res.json({ posts: "Go and explore myInsta" });
@@ -158,10 +183,11 @@ router.get("/allpost", requireLogin, (req, res) => {
 
 router.get("/savedpost", requireLogin, (req, res) => {
   let myid = req.user._id;
-  Post.find({ saved: req.user._id })
+  Post.find({ saved: req.user._id, archive: "no" })
 
     .populate("postedBy", "_id username dp date")
     .populate("comments.postedBy", "_id username dp")
+    .sort("-createdAt")
     .then((myPost) => {
       if (myPost.length == 0) {
         res.json({ myPost: "No saved pictures" });
@@ -175,9 +201,28 @@ router.get("/savedpost", requireLogin, (req, res) => {
 });
 
 router.get("/mypost", requireLogin, (req, res) => {
-  Post.find({ postedBy: req.user._id })
+  console.log(req.user._id);
+  Post.find({ postedBy: req.user._id, archive: "no" })
     .populate("postedBy", "_id username dp date")
     .populate("comments.postedBy", "_id username dp")
+    .sort("-createdAt")
+    .then((myPost) => {
+      if (myPost.length === 0) {
+        res.json({ myPost: "No Posts Yet" });
+      }
+      res.json({ myPost });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.get("/archivedpost", requireLogin, (req, res) => {
+  console.log(req.user._id);
+  Post.find({ postedBy: req.user._id, archive: "yes" })
+    .populate("postedBy", "_id username dp date")
+    .populate("comments.postedBy", "_id username dp")
+    .sort("-createdAt")
     .then((myPost) => {
       if (myPost.length === 0) {
         res.json({ myPost: "No Posts Yet" });
