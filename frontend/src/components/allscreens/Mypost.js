@@ -154,8 +154,48 @@ const Home = () => {
           return item._id !== result._id;
         });
         setData(newData);
-        history.push("/profile");
-        window.location.reload();
+        // history.push("/profile");
+        // window.location.reload();
+        Swal.fire("Deleted", "Post Deleted!", "success");
+      });
+  };
+  const archivePost = (postId) => {
+    console.log(postId);
+    fetch("http://localhost:4000/archivepost", {
+      method: "put",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        editpostid: postId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        // const newData = data.filter((item) => {
+        //   return item._id !== result._id;
+        // });
+        // setData(newData);
+        // history.push("/profile");
+        // window.location.reload();
+      });
+    Swal.fire("Archived", "Post Archived!", "success");
+  };
+  const reload = () => {
+    fetch("http://localhost:4000/mypost", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setData(result.myPost);
+        console.log(data.length);
+        setPostNo(result.myPost.length);
+        setLoading(true);
       });
   };
   return (
@@ -351,6 +391,7 @@ const Home = () => {
                           //   localStorage.setItem("deleteposturl", item.photo);
                           //   localStorage.setItem("deletepostcaption", item.caption);
                           //   localStorage.setItem("deletepostid", item._id);
+                          reload();
                         }}
                       >
                         delete
@@ -410,6 +451,20 @@ const Home = () => {
                       chat_bubble_outline
                     </i>
                   </Link>
+                  <i
+                    className="material-icons archive"
+                    onClick={() => {
+                      archivePost(item._id);
+                      reload();
+                    }}
+                    style={{
+                      color: "black",
+                      cursor: "pointer",
+                      float: "right",
+                    }}
+                  >
+                    visibility_off
+                  </i>
                   <br></br>
                   <Link
                     to="/likes"
