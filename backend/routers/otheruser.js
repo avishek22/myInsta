@@ -11,9 +11,10 @@ router.get("/user/:id", requireLogin, (req, res) => {
   User.findOne({ _id: req.params.id })
     .select("-password")
     .then((user) => {
-      Post.find({ postedBy: req.params.id })
+      Post.find({ postedBy: req.params.id, archive: "no" })
         .populate("postedBy", "_id username dp")
         .populate("comments.postedBy", "_id username dp")
+        .sort("-createdAt")
         .exec((err, myPost) => {
           if (err) {
             return res.status(422).json({ error: err });

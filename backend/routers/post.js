@@ -80,6 +80,7 @@ router.put("/editpost", requireLogin, (req, res) => {
 });
 
 router.put("/archivepost", requireLogin, (req, res) => {
+  console.log(req.user);
   Post.findByIdAndUpdate(req.body.editpostid, {
     $set: { archive: "yes" },
   })
@@ -225,7 +226,7 @@ router.get("/archivedpost", requireLogin, (req, res) => {
     .sort("-createdAt")
     .then((myPost) => {
       if (myPost.length === 0) {
-        res.json({ myPost: "No Posts Yet" });
+        res.json({ myPost: "None Archived" });
       }
       res.json({ myPost });
     })

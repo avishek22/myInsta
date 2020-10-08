@@ -23,6 +23,7 @@ import Notification from "./components/allscreens/Notification";
 import Savedphoto from "./components/allscreens/Savedphoto";
 import Otherfollowers from "./components/allscreens/Otherfollowers";
 import Otherfollowing from "./components/allscreens/Otherfollowing";
+import Archived from "./components/allscreens/Archived";
 import TitleComponent from "./components/allscreens/TitleComponent";
 
 export const UserContext = createContext();
@@ -155,6 +156,10 @@ const Routing = () => {
       <Route exact path="/savedphoto">
         <Navbar></Navbar>
         <Savedphoto></Savedphoto>
+      </Route>
+      <Route exact path="/archived">
+        <Navbar></Navbar>
+        <Archived></Archived>
       </Route>
     </Switch>
   );

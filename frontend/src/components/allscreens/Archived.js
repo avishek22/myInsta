@@ -37,7 +37,7 @@ const Home = () => {
       });
   }, []);
   useEffect(() => {
-    fetch("http://localhost:4000/mypost", {
+    fetch("http://localhost:4000/archivedpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -159,9 +159,9 @@ const Home = () => {
         Swal.fire("Deleted", "Post Deleted!", "success");
       });
   };
-  const archivePost = (postId) => {
+  const unarchivePost = (postId) => {
     console.log(postId);
-    fetch("http://localhost:4000/archivepost", {
+    fetch("http://localhost:4000/unarchivepost", {
       method: "put",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -181,7 +181,7 @@ const Home = () => {
         // history.push("/profile");
         window.location.reload();
       });
-    Swal.fire("Archived", "Post Archived!", "success");
+    Swal.fire("Unrchived", "Post Shown in Profile!", "success");
   };
   const reload = () => {
     fetch("http://localhost:4000/mypost", {
@@ -200,7 +200,7 @@ const Home = () => {
   };
   return (
     <div className="navfix mypost">
-      <div
+      {/* <div
         style={{
           display: "flex",
           justifyContent: "space-around",
@@ -275,8 +275,8 @@ const Home = () => {
       </div>
       <hr
         style={{ border: "1px solid #e0e0e0", marginTop: "2%", width: "85%" }}
-      ></hr>
-      <div className="prof">
+      ></hr> */}
+      {/* <div className="prof">
         <Link to="/profile">
           <i
             className="large profi material-icons hov"
@@ -293,9 +293,9 @@ const Home = () => {
             format_align_justify
           </i>
         </Link>
-      </div>
+      </div> */}
       <div className="home">
-        {data !== "No Posts Yet" ? (
+        {data !== "None Archived" ? (
           data.map((item) => {
             return (
               <div className="card home-card input-field" key={item._id}>
@@ -454,8 +454,8 @@ const Home = () => {
                   <i
                     className="material-icons archive"
                     onClick={() => {
-                      archivePost(item._id);
-                      reload();
+                      unarchivePost(item._id);
+                      //reload();
                     }}
                     style={{
                       color: "black",
@@ -463,7 +463,7 @@ const Home = () => {
                       float: "right",
                     }}
                   >
-                    visibility_off
+                    visibility
                   </i>
                   <br></br>
                   <Link
@@ -545,12 +545,12 @@ const Home = () => {
             );
           })
         ) : (
-          <div style={{ margin: "10% 30%" }}>
+          <div style={{ margin: "35% 30%" }}>
             <i
-              style={{ marginLeft: "30%", width: "40%" }}
+              style={{ marginLeft: "33%", width: "40%" }}
               className="large material-icons"
             >
-              add_a_photo
+              visibility_off
             </i>
             <h3 style={{ margin: "0 10%" }}>{data}</h3>
           </div>

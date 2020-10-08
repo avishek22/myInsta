@@ -154,6 +154,18 @@ const Navbar = () => {
             </div>
           </Link>
           <Link
+            to="/archived"
+            style={{ color: "black" }}
+            onClick={() => {
+              materialize.Modal.getInstance(navs.current).close();
+            }}
+          >
+            <div style={{ display: "flex" }} className="navlink">
+              <i className="material-icons">visibility_off</i>
+              <h6 style={{ marginLeft: "15%", marginTop: 15 }}>Archived</h6>
+            </div>
+          </Link>
+          <Link
             to="/savedphoto"
             style={{ color: "black" }}
             onClick={() => {
@@ -188,7 +200,7 @@ const Navbar = () => {
 
       <div
         id="modal2"
-        className="modal"
+        className="modal search"
         ref={searchmodal}
         style={{ color: "black" }}
       >
@@ -225,6 +237,7 @@ const Navbar = () => {
                       style={{ color: "black", backgroundColor: "white" }}
                       className="search"
                       onClick={() => {
+                        //if (item._id !== state._id) window.location.reload();
                         materialize.Modal.getInstance(
                           searchmodal.current
                         ).close();
