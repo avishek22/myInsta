@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
 import CircularJSON from "circular-json";
+import Swal from "sweetalert2";
 let click = 0;
 const Home = () => {
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
+  const [len, setLen] = useState(0);
   useEffect(() => {
     fetch("http://localhost:4000/showfollowrequest", {
       method: "get",
@@ -20,6 +22,8 @@ const Home = () => {
         console.log(result.user.followrequest);
         setData(result.user.followrequest);
         setLoading(true);
+        console.log(result.user.followrequest.length);
+        setLen(result.user.followrequest.length);
       })
       .catch((e) => {
         console.log(e);
@@ -41,7 +45,8 @@ const Home = () => {
       .then((result) => {
         console.log(result);
         click = click + 1;
-        window.location.reload();
+        Swal.fire("Accepted", "Request Accepted", "success");
+        //  window.location.reload();
       })
       .catch((e) => {
         console.log(e);
@@ -62,7 +67,29 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        window.location.reload();
+        //window.location.reload();
+        Swal.fire("Removed", "Request Removed", "success");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const reload = () => {
+    fetch("http://localhost:4000/showfollowrequest", {
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        console.log(result.user.followrequest);
+        setData(result.user.followrequest);
+        setLoading(true);
+        console.log(result.user.followrequest.length);
+        setLen(result.user.followrequest.length);
       })
       .catch((e) => {
         console.log(e);
@@ -128,79 +155,85 @@ const Home = () => {
       )}
 
       <div className="likes card home-card input-field navfix">
-        {data.map((item) => {
-          return (
-            <div className="" key={item._id}>
-              <div style={{ display: "flex" }}>
-                <Link
-                  to={
-                    item._id !== state._id
-                      ? "/otherprofile/" + item._id
-                      : "/profile"
-                  }
-                  style={{ margin: "5% 0% 5% 5%" }}
-                >
-                  <img
-                    src={item.dp}
-                    style={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: 30,
-                      margin: "5% 0% 5% 5%",
-                      pointerEvents: "none",
-                    }}
-                  ></img>
-                </Link>
-                <div style={{ marginLeft: "10%" }}>
-                  <p
-                    style={{
-                      marginTop: "7%",
-                      marginLeft: "5%",
-                      marginBottom: "3%",
-                      fontSize: "25px",
-                    }}
+        {len === 0 ? (
+          <h1>No Follow Requests</h1>
+        ) : (
+          data.map((item) => {
+            return (
+              <div className="" key={item._id}>
+                <div style={{ display: "flex" }}>
+                  <Link
+                    to={
+                      item._id !== state._id
+                        ? "/otherprofile/" + item._id
+                        : "/profile"
+                    }
+                    style={{ margin: "5% 0% 5% 5%" }}
                   >
-                    <Link
-                      to={
-                        item._id !== state._id
-                          ? "/otherprofile/" + item._id
-                          : "/profile"
-                      }
+                    <img
+                      src={item.dp}
+                      style={{
+                        width: 60,
+                        height: 60,
+                        borderRadius: 30,
+                        margin: "5% 0% 5% 5%",
+                        pointerEvents: "none",
+                      }}
+                    ></img>
+                  </Link>
+                  <div style={{ marginLeft: "10%" }}>
+                    <p
+                      style={{
+                        marginTop: "7%",
+                        marginLeft: "5%",
+                        marginBottom: "3%",
+                        fontSize: "25px",
+                      }}
                     >
-                      <strong>{item.username}</strong>
-                    </Link>
-                  </p>
-                  <div style={{ display: "flex" }}>
-                    <button
-                      className="btn waves-effect waves-light btn-block login "
-                      style={{ width: "65%", margin: "3%", paddingLeft: 10 }}
-                      onClick={() => {
-                        click = click + 1;
-                        if (click === 1) {
-                          console.log(item._id);
-                          acceptrequest(item._id);
+                      <Link
+                        to={
+                          item._id !== state._id
+                            ? "/otherprofile/" + item._id
+                            : "/profile"
                         }
-                      }}
-                    >
-                      Confirm
-                    </button>
-                    <button
-                      className="btn waves-effect waves-light btn-block login "
-                      style={{ width: "65%", margin: "3% 0% 3% 1%" }}
-                      onClick={() => {
-                        console.log(item._id);
-                        deleterequest(item._id);
-                      }}
-                    >
-                      Remove
-                    </button>
+                      >
+                        <strong>{item.username}</strong>
+                      </Link>
+                    </p>
+                    <div style={{ display: "flex" }}>
+                      <button
+                        className="btn waves-effect waves-light btn-block login "
+                        style={{ width: "65%", margin: "3%", paddingLeft: 10 }}
+                        onClick={() => {
+                          click = click + 1;
+                          if (click === 1) {
+                            console.log(item._id);
+                            acceptrequest(item._id);
+                            reload();
+                          }
+                        }}
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        className="btn waves-effect waves-light btn-block login "
+                        style={{ width: "65%", margin: "3% 0% 3% 1%" }}
+                        onClick={() => {
+                          console.log(item._id);
+                          deleterequest(item._id);
+                          reload();
+                        }}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </div>
+                <hr></hr>
               </div>
-              <hr></hr>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );

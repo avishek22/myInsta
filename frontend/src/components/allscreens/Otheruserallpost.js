@@ -269,6 +269,8 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        // history.push("/");
+
         window.location.reload();
       });
   };
@@ -282,6 +284,8 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        history.push(`/otherprofile/${userid}`);
+
         window.location.reload();
       });
   };

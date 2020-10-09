@@ -137,7 +137,7 @@ const Profile = () => {
             })
           : ""}
         {mypost === "No Posts Yet" ? (
-          <h4>No New Notifications.</h4>
+          <h4>No New Notifications regarding posts.</h4>
         ) : (
           mypost.map((item) => {
             return (
