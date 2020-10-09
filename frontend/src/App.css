@@ -13,6 +13,16 @@
   border-radius: 5%;
   transition: 0.5s all;
 }
+
+i.archive {
+  padding: 2%;
+}
+
+i.archive:hover {
+  background-color: rgba(204, 197, 196, 0.5);
+  border-radius: 5%;
+  transition: 0.5s all;
+}
 img.modal-trigger.navlink:active {
   border: 1px solid black;
 }
@@ -51,6 +61,13 @@ a {
   /* box-shadow: 0 1px 0 0 #000 !important; */
 }
 .input-field input[type="text"]:focus {
+  border: 1px solid #000000 !important;
+  box-shadow: 0 1px 0 0 #000 !important;
+
+  /* margin-top: 1%; */
+}
+
+.modal.search input[type="text"]:focus {
   border: 1px solid #000000 !important;
   box-shadow: 0 1px 0 0 #000 !important;
 
@@ -101,6 +118,22 @@ i.hov {
 }
 
 i.hov:hover {
+  background-color: rgba(204, 197, 196, 0.5);
+  border-radius: 5%;
+  transition: 0.5s all;
+}
+
+i.commentdelete {
+  margin-top: 7%;
+  margin-left: auto;
+  margin-right: 5%;
+  font-size: 25px;
+  cursor: pointer;
+  margin-bottom: 7%;
+  padding: 2%;
+}
+
+i.commentdelete:hover {
   background-color: rgba(204, 197, 196, 0.5);
   border-radius: 5%;
   transition: 0.5s all;
@@ -201,6 +234,9 @@ div.editpost {
   div.modal.profile {
     width: 10%;
     margin-left: 70%;
+  }
+  div.modal.search {
+    width: 30%;
   }
   h6.navtext {
     margin-top: "15%";

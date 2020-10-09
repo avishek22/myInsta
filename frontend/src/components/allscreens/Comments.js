@@ -195,14 +195,7 @@ const Home = () => {
                   {state._id === item.postedBy._id ||
                   state._id === localStorage.getItem("postedBy") ? (
                     <i
-                      className="material-icons "
-                      style={{
-                        marginTop: "8%",
-                        marginLeft: "auto",
-                        marginRight: "5%",
-                        fontSize: "25px",
-                        cursor: "pointer",
-                      }}
+                      className="material-icons commentdelete"
                       onClick={() => {
                         localStorage.setItem(
                           "deleteCommentBy",
