@@ -164,22 +164,62 @@ router.delete("/deletepost/:postId", requireLogin, (req, res) => {
     });
 });
 
+function mySort(array) {
+  array.sort(function (a, b) {
+    scorea = a.likes.length * 0.2 + a.comments.length * 0.2
+    scoreb = b.likes.length * 0.2 + b.comments.length * 0.2
+    console.log(a.likes.length * 0.2 + a.comments.length * 0.2)
+    console.log(b.likes.length * 0.2 + b.comments.length * 0.2)
+
+
+
+
+
+
+    if (scorea > scoreb) {
+
+      return -1;
+    } else if (scorea < scoreb) {
+
+      return 1;
+
+    } else {
+
+
+      return 0;
+    }
+  })
+
+  return array;
+
+}
+
 router.get("/allpost", requireLogin, (req, res) => {
   Post.find({ postedBy: { $in: req.user.following }, archive: "no" })
 
     .populate("postedBy", "_id username dp date")
     .populate("comments.postedBy", "_id username dp")
-    .sort("-createdAt")
-    .then((posts) => {
-      if (posts.length === 0) {
+    .exec(function (err, instances) {
+      if (instances.length === 0) {
         res.json({ posts: "Go and explore myInsta" });
-      } else {
-        res.json({ posts });
+      }
+      else {
+        let sorted = mySort(instances);
+
+        let response = {};
+
+        if (err) {
+          res.json({ error: err })
+        } else {
+
+          response.message = sorted;
+        }
+
+        res.status(200).json(response.message);
       }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+
+
 });
 
 router.get("/savedpost", requireLogin, (req, res) => {

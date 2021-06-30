@@ -24,6 +24,8 @@ const Home = () => {
       });
   }, []);
 
+  
+
   const likePost = (id) => {
     fetch("http://localhost:4000/like", {
       method: "put",
